@@ -1,0 +1,18 @@
+extends layout
+
+block content
+  h1 Add New Book
+  form(action='/authors/new', method='post')
+    label(for='first_name') First Name
+      input(name='first_name', type='text', placeholder='first name')
+    label(for='last_name') Last Name
+      input(name='last_name', type='text', placeholder='last name')
+    label(for='portrait_url') Portrait Image URL
+      input(name='portrait_url', type='text', placeholder='url')
+    label(for='biography') Biography
+      textarea(name='biography', placeholder='biography')
+    select(name='book') Book(s)
+      option Books
+      each book in books
+        option(value= book.title)= book.title
+    input(type="submit", value="add author")

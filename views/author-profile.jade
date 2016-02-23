@@ -1,0 +1,14 @@
+extends layout
+
+block content
+  ul
+    if author
+      li= author.first_name + ' ' + author.last_name
+      li= author.biography
+      li Books
+      ul
+        each book in author.books
+          li
+            a(href='/books/'+book)= book
+      button(id='delete-author', value=author.first_name + '~' + author.last_name)= 'Delete ' + author.first_name + ' ' + author.last_name
+      img(class='portrait_img_large' src= author.portrait_url)

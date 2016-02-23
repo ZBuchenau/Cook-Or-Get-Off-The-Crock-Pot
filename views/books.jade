@@ -1,0 +1,22 @@
+extends layout
+
+block content
+  h1 Books
+  h3= 'Results ' + resultsAmount
+  ul
+    each book in books
+      if book
+        li= book.title
+        li= book.genre
+        li Author(s)
+        ul
+          if book.authors[0].first_name !== null
+            each author in book.authors
+              li
+                a(href='/authors/'+author.first_name + '~' + author.last_name)= author.first_name + ' ' + author.last_name
+          else
+            li No Author Listed
+        li
+          form(action='/books/'+book.title)
+            input(type='submit', value='Learn More About '+book.title)
+        img(class='cover_img_small' src= book.cover_url)
