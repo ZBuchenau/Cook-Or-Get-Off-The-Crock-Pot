@@ -1,18 +1,21 @@
 require('dotenv').load();
 var express = require('express');
+var bcrypt = require('bcrypt');
 var expressJwt = require('express-jwt');
 var jwt = require('jsonwebtoken');
 var router = express.Router();
 
 router.post('/authenticate', function(req, res) {
-
-
-  // knex('users')
-  //   .select('password')
-  //   .where(username, req.body.username)
-  //   .then(function(user) {
-  //
-  //   });
+  var hash = bcrypt.hashSync(req.body.password, 11);
+  console.log(bcrypt.compareSync('foobar', hash));
+  knex('users')
+    .select('*')
+    .where(username, req.body.username)
+    .then(function(info) {
+      var password = info[0].password;
+      var hash = bcrypt.hashSync(req.body.password, 11);
+      bcrypt.compareSync(password, hash);
+    });
 
   if (!(req.body.username === 'john.doe' && req.body.password === 'foobar')) {
     res.json(401, 'Wrong user or password');
@@ -25,7 +28,7 @@ router.post('/authenticate', function(req, res) {
   };
   // Set up the JSON Web Token
   var token = jwt.sign(profile, process.env.SECRET, {
-    expiresInMinutes: 60 * 24
+    expiresIn: 60 * 5
   });
   // Send the JSON Web Token
   res.json({
