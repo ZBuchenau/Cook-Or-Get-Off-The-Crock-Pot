@@ -9,7 +9,7 @@ router.post('/authenticate', function(req, res) {
     .select('password')
     .where(username, req.body.username)
     .then(function(user) {
-      
+
     });
   if (!(req.body.username === 'john.doe' && req.body.password === 'foobar')) {
     res.json(401, 'Wrong user or password');
