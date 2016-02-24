@@ -9,21 +9,27 @@ router.post('/signup', function(req, res, next) {
   var unhashedPassword = req.body.password;
   // var validPassword = accounts.validPassword(unhashedPassword);
   accounts.validUsername(req.body)
-    .then(accounts.validPassword())
-    .then(function(info) {
-      console.log(info);
+    .then(accounts.validPassword)
+    .then(accounts.hash)
+    .then(function(submission) {
+      //Submission is Valid
+      knex('users').insert(submission).then(function() {
+        res.json('success');
+      }).catch(function(error) {
+        console.log(error);
+      });
     })
-    .catch(function() {
-      //Password is Invalid
-
+    .catch(function(error) {
+      //Submission is Invalid
+      res.json(error);
     });
-  if (validPassword) {
-    accounts.hash(unhashedPassword).then(function(hashedPassword) {
-      req.body.password = hashedPassword;
-    });
-  } else {
-    res.json('invalid password');
-  }
+  // if (validPassword) {
+  //   accounts.hash(unhashedPassword).then(function(hashedPassword) {
+  //     req.body.password = hashedPassword;
+  //   });
+  // } else {
+  //   res.json('invalid password');
+  // }
 });
 
 router.post('/authenticate', function(req, res) {

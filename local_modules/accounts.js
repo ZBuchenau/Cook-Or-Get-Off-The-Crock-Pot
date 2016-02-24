@@ -5,11 +5,18 @@ module.exports = function() {
     validUsername: function(submission) {
       var username = submission.username;
       return new Promise(function(resolve, reject) {
-        resolve(submission);
+        knex('users')
+          .select('id')
+          .where('username', username)
+          .then(function(matchingNames) {
+            if (matchingNames.length) {
+              reject('not unique username');
+            }
+            resolve(submission);
+          });
       });
     },
     validPassword: function(submission) {
-      console.log(submission);
       var password = submission.password;
       return new Promise(function(resolve, reject) {
         if (password.length >= 4 && password.length <= 16) {
@@ -18,14 +25,16 @@ module.exports = function() {
         resolve('invalid password');
       });
     },
-    hash: function(password) {
+    hash: function(submission) {
+      var password = submission.password;
       return new Promise(function(resolve, reject) {
         bcrypt.genSalt(10, function(err, salt) {
           bcrypt.hash(password, salt, function(error, hash) {
             if (error) {
               reject(error);
             }
-            resolve(hash);
+            submission.password = hash;
+            resolve(submission);
           });
         });
       });
