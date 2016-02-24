@@ -7,7 +7,7 @@ module.exports = function() {
         bcrypt.genSalt(10, function(err, salt) {
           bcrypt.hash(password, salt, function(error, hash) {
             if (error) {
-              console.log(error);
+              reject(error);
             }
             resolve(hash);
           });
@@ -33,6 +33,8 @@ module.exports = function() {
                 resolve(false);
               }
             });
+          }).catch(function(error) {
+            reject(error);
           });
       });
     }

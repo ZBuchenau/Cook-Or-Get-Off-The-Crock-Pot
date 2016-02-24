@@ -3,8 +3,6 @@ var express = require('express');
 var expressJwt = require('express-jwt');
 var jwt = require('jsonwebtoken');
 var accounts = require('../local_modules/accounts')();
-var bcrypt = require('bcrypt');
-var salt = bcrypt.genSaltSync(10);
 var router = express.Router();
 
 router.post('/authenticate', function(req, res) {
@@ -20,7 +18,7 @@ router.post('/authenticate', function(req, res) {
       res.json('invalid');
     }
   }).catch(function(error) {
-    console.log(error);
+    res.json(error);
   });
 });
 
