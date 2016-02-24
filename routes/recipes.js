@@ -7,8 +7,9 @@ router.get('/', function(req, res) {
 });
 
 router.get('/random', function(req, res) {
-  knex.raw("SELECT * FROM recipes ORDER BY RANDOM() LIMIT 5").then(function(randomRecipe){
-    res.json(randomRecipe.rows);
+  var amount = 5;//req.body.amount;
+  knex.raw("SELECT * FROM recipes ORDER BY RANDOM() LIMIT " + amount).then(function(randomRecipe){
+      res.json(randomRecipe.rows);
   });
 });
 
