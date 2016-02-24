@@ -1,4 +1,4 @@
-// 'use strict'
+'use strict';
 var express = require('express');
 var router = express.Router();
 
@@ -10,17 +10,18 @@ router.post('/shopping-list', function(req, res) {
   var recipes = req.body.recipes;
   var recipePromises = [];
   recipes.forEach(function(element, index) {
-    recipePromises.push(knex('recipes')
-      .select('*')
-      .where('id', element.id));
-    // .leftJoin('recipe_ingredients', 'recipe.id', 'recipe_ingredients.recipe_id')
-    // .leftJoin('ingredients', 'recipe_ingredients.ingredients_id', 'ingredients.id'));
+    recipePromises.push(
+      knex('recipes')
+      .select('recipe_ingredients.recipe_id', 'recipe_ingredients.ingredient_id', 'ingredients.name', 'ingredients.aisle', 'recipe_ingredients.unit', 'recipe_ingredients.amount')
+      .where('recipes.id', element.id)
+      .leftJoin('recipe_ingredients', 'recipes.id', 'recipe_ingredients.recipe_id')
+      .leftJoin('ingredients', 'recipe_ingredients.ingredient_id', 'ingredients.id')
+    );
   });
   Promise.all(recipePromises)
-    .then(function(list) {
-      res.json(list);
+    .then(function(ingredientsList) {
+      res.json(ingredientsList);
     });
-
 });
 
 router.post('/random', function(req, res) {

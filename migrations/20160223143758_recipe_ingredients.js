@@ -2,9 +2,9 @@
 exports.up = function(knex, Promise) {
   return knex.schema.createTable('recipe_ingredients', function(table){
     table.increments('id');
-    table.integer('recipe_id').references('id').inTable('recipes');
-    table.integer('ingredient_id').references('id').inTable('ingredients');
-    table.integer('amount');
+    table.integer('recipe_id'); //.unsigned().foreign().references('id').inTable('recipes');
+    table.integer('ingredient_id'); //.unsigned().foreign().references('id').inTable('ingredients');
+    table.decimal('amount');
     table.string('unit');
   });
 };
