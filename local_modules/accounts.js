@@ -10,7 +10,7 @@ module.exports = function() {
           .where('username', username)
           .then(function(matchingNames) {
             if (matchingNames.length) {
-              reject('not unique username');
+              reject('username is not unique');
             }
             resolve(submission);
           });
