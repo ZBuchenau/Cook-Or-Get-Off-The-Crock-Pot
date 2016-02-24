@@ -7,6 +7,7 @@ var router = express.Router();
 
 router.post('/authenticate', function(req, res) {
   var hash = bcrypt.hashSync(req.body.password, 11);
+  console.log(hash);
   console.log(bcrypt.compareSync('foobar', hash));
   knex('users')
     .select('*')
