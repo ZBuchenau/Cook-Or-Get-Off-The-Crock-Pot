@@ -5,6 +5,27 @@ var jwt = require('jsonwebtoken');
 var accounts = require('../local_modules/accounts')();
 var router = express.Router();
 
+router.post('/signup', function(req, res, next) {
+  var unhashedPassword = req.body.password;
+  // var validPassword = accounts.validPassword(unhashedPassword);
+  accounts.validUsername(req.body)
+    .then(accounts.validPassword())
+    .then(function(info) {
+      console.log(info);
+    })
+    .catch(function() {
+      //Password is Invalid
+
+    });
+  if (validPassword) {
+    accounts.hash(unhashedPassword).then(function(hashedPassword) {
+      req.body.password = hashedPassword;
+    });
+  } else {
+    res.json('invalid password');
+  }
+});
+
 router.post('/authenticate', function(req, res) {
   accounts.authenticate(req.body).then(function(user) {
     if (user) {

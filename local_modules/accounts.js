@@ -2,6 +2,22 @@ var bcrypt = require('bcrypt');
 
 module.exports = function() {
   return {
+    validUsername: function(submission) {
+      var username = submission.username;
+      return new Promise(function(resolve, reject) {
+        resolve(submission);
+      });
+    },
+    validPassword: function(submission) {
+      console.log(submission);
+      var password = submission.password;
+      return new Promise(function(resolve, reject) {
+        if (password.length >= 4 && password.length <= 16) {
+          resolve(submission);
+        }
+        resolve('invalid password');
+      });
+    },
     hash: function(password) {
       return new Promise(function(resolve, reject) {
         bcrypt.genSalt(10, function(err, salt) {

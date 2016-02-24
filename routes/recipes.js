@@ -6,7 +6,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/random', function(req, res, next) {
-  res.json('API recipes/:recipeId');
+  res.json('API recipes/random');
 });
 
 router.get('/:id', function(req, res, next) {
