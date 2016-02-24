@@ -32,11 +32,11 @@ function getRec(arr) {
   for (var i = 0; i < len; i++) {
     var title = recipes[i].title || 'undefined';
     var img_url = recipes[i].image || 'undefined';
-    var prep_time = recipes[i].readyInMinutes || 'undefined';
+    var prep_time = recipes[i].readyInMinutes || 0;
     var instructions = recipes[i].sourceUrl || 'undefined';
     var credit_text = recipes[i].creditText || 'undefined';
-    var likes = recipes[i].aggregateLikes || 'undefined';
-    var servings = recipes[i].servings || 'undefined';
+    var likes = recipes[i].aggregateLikes || 0;
+    var servings = recipes[i].servings || 0;
     var rec = "knex('recipes').insert({ title: '" + title + "', img_url : '" + img_url + "', prep_time : '" + prep_time + "', instructions : '" + instructions + "', credit_text : '" + credit_text + "', likes : '" + likes + "', servings : '" + servings + "'}),";
     console.log(rec);
 

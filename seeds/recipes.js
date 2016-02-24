@@ -2,7 +2,7 @@
 exports.seed = function(knex, Promise) {
   return Promise.join(
     // Deletes ALL existing entries
-    knex('table_name').del(),
+    knex('recipes').del(),
 
     knex('recipes').insert({
       title: 'Char-Grilled Beef Tenderloin with Three-Herb Chimichurri',
@@ -10,56 +10,61 @@ exports.seed = function(knex, Promise) {
       prep_time: '45',
       instructions: 'http://www.epicurious.com/recipes/food/views/Char-Grilled-Beef-Tenderloin-with-Three-Herb-Chimichurri-235342',
       credit_text: 'Epicurious',
-      likes: 'undefined',
+      likes: '0',
       servings: '10'
-    }), knex('recipes').insert({
+    }),
+    knex('recipes').insert({
       title: 'Fried Anchovies With Sage',
       img_url: 'https://spoonacular.com/recipeImages/fried_anchovies_with_sage-1.jpg',
       prep_time: '60',
       instructions: 'http://latavolamarcherecipebox.blogspot.com/2009/10/fried-anchovies-with-sage.html',
       credit_text: 'undefined',
       likes: '1',
-      servings: 'undefined'
-    }), knex('recipes').insert({
+      servings: '0'
+    }),
+    knex('recipes').insert({
       title: 'Anchovies With Breadcrumbs & Scallions',
       img_url: 'https://spoonacular.com/recipeImages/anchovies_with_breadcrumbs_scallions-2.jpg',
       prep_time: '18',
       instructions: 'http://www.thekitchn.com/other-two-veg-recipes-notes-85779',
       credit_text: 'undefined',
-      likes: 'undefined',
+      likes: '0',
       servings: '8'
-    }), knex('recipes').insert({
+    }),
+    knex('recipes').insert({
       title: 'Carrots, Cauliflower And Anchovies',
       img_url: 'https://spoonacular.com/recipeImages/carrots-cauliflower-and-anchovies-2-3.jpg',
       prep_time: '45',
       instructions: 'http://saladpride.blogspot.com/2011/06/carrots-cauliflower-and-anchovies.html',
       credit_text: 'undefined',
-      likes: 'undefined',
+      likes: '0',
       servings: '1'
-    }), knex('recipes').insert({
+    }),
+    knex('recipes').insert({
       title: 'Stir Fried Anchovies (myulchi Bokkeum)',
       img_url: 'https://spoonacular.com/recipeImages/stir_fried_anchovies-4.jpg',
       prep_time: '4',
       instructions: 'http://bapstory.blogspot.com/2011/08/stir-fried-anchovies-myulchi-bokkeum.html',
       credit_text: 'undefined',
       likes: '11',
-      servings: 'undefined'
-    }), knex('recipes').insert({
+      servings: '0'
+    }),
+    knex('recipes').insert({
       title: 'Bread, Butter And Anchovies',
       img_url: 'https://spoonacular.com/recipeImages/bread_butter_and_anchovies-5.jpg',
       prep_time: '3',
       instructions: 'http://en.julskitchen.com/tuscany/grandma-mennas-kitchen-bread-butter-and-anchovies',
-      credit_text: 'Juls Kitchen ',
-      likes: 'undefined ',
-      servings: 'undefined '
+      credit_text: 'Juls Kitchen',
+      likes: '0',
+      servings: '0'
     }),
     knex('recipes').insert({
       title: 'Fried Anchovies',
-      img_url: 'https: //spoonacular.com/recipeImages/fried_anchovies-6.jpg',
+      img_url: 'https://spoonacular.com/recipeImages/fried_anchovies-6.jpg',
       prep_time: '15',
       instructions: 'http://www.sippitysup.com/fried-anchovies',
       credit_text: 'SippitySup',
-      likes: 'undefined',
+      likes: '0',
       servings: '4'
     }),
     knex('recipes').insert({
