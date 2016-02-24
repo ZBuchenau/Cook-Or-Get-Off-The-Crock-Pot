@@ -1,8 +1,19 @@
 var bcrypt = require('bcrypt');
-var salt = bcrypt.genSaltSync(10);
 
 module.exports = function() {
   return {
+    hash: function(password) {
+      return new Promise(function(resolve, reject) {
+        bcrypt.genSalt(10, function(err, salt) {
+          bcrypt.hash(password, salt, function(error, hash) {
+            if (error) {
+              console.log(error);
+            }
+            resolve(hash);
+          });
+        });
+      });
+    },
     authenticate: function(submission) {
       return new Promise(function(resolve, reject) {
         knex('users')
@@ -13,7 +24,7 @@ module.exports = function() {
             var password = user.password;
             delete user.password;
             bcrypt.compare(submission.password, password, function(error, same) {
-              if(error) {
+              if (error) {
                 reject(error);
               }
               if (same) {
