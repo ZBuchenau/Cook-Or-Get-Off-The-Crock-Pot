@@ -5,6 +5,7 @@ exports.seed = function(knex, Promise) {
     knex('recipes').del(),
 
     knex('recipes').insert({
+      id: 1,
       title: 'Char-Grilled Beef Tenderloin with Three-Herb Chimichurri',
       img_url: 'https://spoonacular.com/recipeImages/char-grilled-beef-tenderloin-with-three-herb-chimichurri-156992.jpg',
       prep_time: '45',
@@ -14,6 +15,7 @@ exports.seed = function(knex, Promise) {
       servings: '10'
     }),
     knex('recipes').insert({
+      id: 2,
       title: 'Fried Anchovies With Sage',
       img_url: 'https://spoonacular.com/recipeImages/fried_anchovies_with_sage-1.jpg',
       prep_time: '60',
@@ -23,6 +25,7 @@ exports.seed = function(knex, Promise) {
       servings: '0'
     }),
     knex('recipes').insert({
+      id: 3,
       title: 'Anchovies With Breadcrumbs & Scallions',
       img_url: 'https://spoonacular.com/recipeImages/anchovies_with_breadcrumbs_scallions-2.jpg',
       prep_time: '18',
@@ -32,6 +35,7 @@ exports.seed = function(knex, Promise) {
       servings: '8'
     }),
     knex('recipes').insert({
+      id: 4,
       title: 'Carrots, Cauliflower And Anchovies',
       img_url: 'https://spoonacular.com/recipeImages/carrots-cauliflower-and-anchovies-2-3.jpg',
       prep_time: '45',
@@ -41,6 +45,7 @@ exports.seed = function(knex, Promise) {
       servings: '1'
     }),
     knex('recipes').insert({
+      id: 5,
       title: 'Stir Fried Anchovies (myulchi Bokkeum)',
       img_url: 'https://spoonacular.com/recipeImages/stir_fried_anchovies-4.jpg',
       prep_time: '4',
@@ -50,6 +55,7 @@ exports.seed = function(knex, Promise) {
       servings: '0'
     }),
     knex('recipes').insert({
+      id: 6,
       title: 'Bread, Butter And Anchovies',
       img_url: 'https://spoonacular.com/recipeImages/bread_butter_and_anchovies-5.jpg',
       prep_time: '3',
@@ -59,6 +65,7 @@ exports.seed = function(knex, Promise) {
       servings: '0'
     }),
     knex('recipes').insert({
+      id: 7,
       title: 'Fried Anchovies',
       img_url: 'https://spoonacular.com/recipeImages/fried_anchovies-6.jpg',
       prep_time: '15',
@@ -68,6 +75,7 @@ exports.seed = function(knex, Promise) {
       servings: '4'
     }),
     knex('recipes').insert({
+      id: 8,
       title: 'Tomato & Anchovies With Bread Crumbs, Basil & Red Onion   Recip',
       img_url: 'https://spoonacular.com/recipeImages/tomato_anchovies_with_bread_crumbs_basil_red_onion_recip-7.jpg',
       prep_time: '45',
@@ -77,6 +85,7 @@ exports.seed = function(knex, Promise) {
       servings: '1'
     }),
     knex('recipes').insert({
+      id: 9,
       title: 'Orecchiette, Broccoli Raab & Anchovies',
       img_url: 'https://spoonacular.com/recipeImages/orecchiette-broccoli-raab-anchovies-2-8.jpg',
       prep_time: '45',
