@@ -1,38 +1,24 @@
 require('dotenv').load();
 var express = require('express');
-var bcrypt = require('bcrypt');
 var expressJwt = require('express-jwt');
 var jwt = require('jsonwebtoken');
+var accounts = require('../local_modules/accounts')();
 var router = express.Router();
 
 router.post('/authenticate', function(req, res) {
-  var hash = bcrypt.hashSync(req.body.password, 11);
-  console.log(bcrypt.compareSync('foobar', hash));
-  knex('users')
-    .select('*')
-    .where(username, req.body.username)
-    .then(function(info) {
-      var password = info[0].password;
-      var hash = bcrypt.hashSync(req.body.password, 11);
-      bcrypt.compareSync(password, hash);
-    });
-
-  if (!(req.body.username === 'john.doe' && req.body.password === 'foobar')) {
-    res.json(401, 'Wrong user or password');
-  }
-  var profile = {
-    first_name: 'John',
-    last_name: 'Doe',
-    email: 'john@doe.com',
-    id: 123
-  };
-  // Set up the JSON Web Token
-  var token = jwt.sign(profile, process.env.SECRET, {
-    expiresIn: 60 * 5
-  });
-  // Send the JSON Web Token
-  res.json({
-    token: token
+  accounts.authenticate(req.body).then(function(user) {
+    if (user) {
+      var token = jwt.sign(user, process.env.SECRET, {
+        expiresIn: 60 * 5
+      });
+      res.json({
+        token: token,
+      });
+    } else {
+      res.json('invalid');
+    }
+  }).catch(function(error) {
+    res.json(error);
   });
 });
 

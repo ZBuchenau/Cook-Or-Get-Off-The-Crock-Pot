@@ -2,7 +2,7 @@
 exports.seed = function(knex, Promise) {
   return Promise.join(
     // Deletes ALL existing entries
-    knex('table_name').del(),
+    knex('ingredients').del(),
     knex('ingredients').insert({
       name: 'ancho chile powder',
       aisle: 'Ethnic Foods'

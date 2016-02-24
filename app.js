@@ -15,14 +15,14 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
 app.use(function(req, res, next) {
-  
+
   knex = require('./db/knex');
   next();
 });
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
+app.use(cookieParser(process.env.SECRET));
 
 app.use('/', routes);
 app.use('/users', users);
