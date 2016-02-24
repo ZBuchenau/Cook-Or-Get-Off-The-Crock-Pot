@@ -1,4 +1,31 @@
-[{
+'use strict';
+var fs = require('fs');
+
+// target knex('ingredients').insert({ name: 'string', aisle : 'string'})
+
+function getIng(arr) {
+  var recipes = arr;
+  var len = arr.length;
+  for (var i = 0; i < len; i++) {
+    var current = recipes[i].extendedIngredients;
+    var currentLen = current.length;
+
+    for (var c = 0; c < currentLen; c++) {
+      var name = current[c].name;
+      var aisle = current[c].aisle;
+      var ing = "knex('ingredients').insert({ name: '" + name + "', aisle : '" + aisle + "'}),";
+      console.log(ing);
+      fs.appendFile('ingredients.txt', ing , function(err) {
+        if (err) {
+          throw err;
+        }
+        console.log('The "data to append" was appended to file!');
+      });
+    }
+
+  }
+}
+var recipes = [{
     "vegetarian": false,
     "vegan": false,
     "glutenFree": true,
@@ -874,4 +901,5 @@
     "readyInMinutes": 45,
     "image": "https://spoonacular.com/recipeImages/orecchiette-broccoli-raab-anchovies-2-8.jpg"
   }
-]
+];
+getIng(recipes);
