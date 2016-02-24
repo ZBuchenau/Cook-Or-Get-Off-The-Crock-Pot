@@ -15,7 +15,7 @@ function getIng(arr) {
       var aisle = current[c].aisle;
       var ing = "knex('ingredients').insert({ name: '" + name + "', aisle : '" + aisle + "'}),";
       console.log(ing);
-      fs.appendFile('ingredients.txt', ing , function(err) {
+      fs.appendFile('ingredients.txt', ing, function(err) {
         if (err) {
           throw err;
         }
@@ -25,6 +25,40 @@ function getIng(arr) {
 
   }
 }
+
+function getRec(arr) {
+  var recipes = arr;
+  var len = arr.length;
+  for (var i = 0; i < len; i++) {
+    var title = recipes[i].title || 'undefined';
+    var img_url = recipes[i].image || 'undefined';
+    var prep_time = recipes[i].readyInMinutes || 'undefined';
+    var instructions = recipes[i].sourceUrl || 'undefined';
+    var credit_text = recipes[i].creditText || 'undefined';
+    var likes = recipes[i].aggregateLikes || 'undefined';
+    var servings = recipes[i].servings || 'undefined';
+    var rec = "knex('recipes').insert({ title: '" + title + "', img_url : '" + img_url + "', prep_time : '" + prep_time + "', instructions : '" + instructions + "', credit_text : '" + credit_text + "', likes : '" + likes + "', servings : '" + servings + "'}),";
+    console.log(rec);
+
+    fs.appendFile('recipes.txt', rec, function(err) {
+      if (err) {
+        throw err;
+      }
+      console.log('The "data to append" was appended to file!');
+    });
+  }
+}
+// knex('table_name').insert({
+//    title: title,
+//   'img_url: "image",
+//   'prep_time': "readyInMinutes",
+//   'instructions': "sourceUrl",
+//   'credit_text': "creditText",
+//   'likes': "aggregateLikes",
+//   "servings": "servings"
+// })
+
+
 var recipes = [{
     "vegetarian": false,
     "vegan": false,
@@ -571,8 +605,8 @@ var recipes = [{
     "sourceUrl": "http://en.julskitchen.com/tuscany/grandma-mennas-kitchen-bread-butter-and-anchovies",
     "spoonacularSourceUrl": "https://spoonacular.com/bread-butter-and-anchovies-5",
     "aggregateLikes": 0,
-    "creditText": "Jul's Kitchen",
-    "sourceName": "Jul's Kitchen",
+    "creditText": "Juls Kitchen",
+    "sourceName": "Juls Kitchen",
     "extendedIngredients": [{
       "aisle": "?",
       "name": "anchovies, in oil",
@@ -902,4 +936,4 @@ var recipes = [{
     "image": "https://spoonacular.com/recipeImages/orecchiette-broccoli-raab-anchovies-2-8.jpg"
   }
 ];
-getIng(recipes);
+getRec(recipes);
