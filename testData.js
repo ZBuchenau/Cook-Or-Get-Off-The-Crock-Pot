@@ -6,6 +6,7 @@ var fs = require('fs');
 function getIng(arr) {
   var recipes = arr;
   var len = arr.length;
+  var lookupCounter = 1;
   for (var i = 0; i < len; i++) {
     var current = recipes[i].extendedIngredients;
     var currentLen = current.length;
@@ -13,9 +14,22 @@ function getIng(arr) {
     for (var c = 0; c < currentLen; c++) {
       var name = current[c].name;
       var aisle = current[c].aisle;
-      var ing = "knex('ingredients').insert({ name: '" + name + "', aisle : '" + aisle + "'}),";
+      var amount = current[c].amount;
+      var unit = current[c].unitShort.toString();
+      if (!unit) {
+        unit = null;
+      }
+      var ing = "knex('ingredients').insert({ id: " + lookupCounter + ", name: '" + name + "', aisle : '" + aisle + "'}),\n";
       console.log(ing);
       fs.appendFile('ingredients.txt', ing, function(err) {
+        if (err) {
+          throw err;
+        }
+        console.log('The "data to append" was appended to file!');
+      });
+      var recIng = "knex('recipe_ingredients').insert({ id: " + lookupCounter + ", recipe_id: " + (i + 1) + ", ingredient_id: " + lookupCounter + ", amount: " + amount + ", unit: '" + unit + "'}),\n";
+      lookupCounter++;
+      fs.appendFile('lookup.txt', recIng, function(err) {
         if (err) {
           throw err;
         }
@@ -936,4 +950,4 @@ var recipes = [{
     "image": "https://spoonacular.com/recipeImages/orecchiette-broccoli-raab-anchovies-2-8.jpg"
   }
 ];
-getRec(recipes);
+getIng(recipes);

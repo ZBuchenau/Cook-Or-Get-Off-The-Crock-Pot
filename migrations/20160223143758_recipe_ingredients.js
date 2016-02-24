@@ -2,11 +2,10 @@
 exports.up = function(knex, Promise) {
   return knex.schema.createTable('recipe_ingredients', function(table){
     table.increments('id');
-    table.integer('recipe_id');// REFERENCES recipes ('id');
-    table.integer('ingredient_id'); //REFERENCES ingredients ('id');
+    table.integer('recipe_id').references('id').inTable('recipes');
+    table.integer('ingredient_id').references('id').inTable('ingredients');
     table.integer('amount');
     table.string('unit');
-  //  PRIMARY_KEY ('id', 'id');
   });
 };
 
