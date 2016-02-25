@@ -25,6 +25,7 @@ router.post('/shopping-list', function(req, res) {
 });
 
 router.post('/random', function(req, res) {
+  res.json('this is working');
   var amount = req.body.amount;
   knex.raw("SELECT * FROM recipes ORDER BY RANDOM() LIMIT " + amount).then(function(randomRecipe) {
     res.json(randomRecipe.rows);
