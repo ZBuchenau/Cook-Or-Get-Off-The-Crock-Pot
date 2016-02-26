@@ -60,4 +60,34 @@ router.get('/:userId', function(req, res, next) {
   res.json('API Users');
 });
 
+router.post('/protected/:phone', function(req, res, next){
+  var client = require('twilio')(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
+  if(phoneCheck(req.params.phone)){
+    client.sendMessage({
+        to: "+1" + req.params.phone,
+        from: "+1" + process.env.TWILIO_PHONE,
+        body: "Testing"
+    }, function(err, message) {
+        if(err){
+          console.log(err);
+        } else {
+          console.log(message);
+        }
+
+        res.send('text has been sent!');
+    });
+  }
+  else {
+    res.send('Invalid Phone Number');
+  }
+});
+
+function phoneCheck(num){
+  if(/^[0-9]{10}$/.test(num)){
+     return true;
+  } else {
+    return false;
+  }
+}
+
 module.exports = router;
