@@ -5,6 +5,20 @@ var jwt = require('jsonwebtoken');
 var accounts = require('../local_modules/accounts')();
 var router = express.Router();
 
+var jwtCheck = expressJwt({
+  secret: process.env.SECRET
+});
+
+router.use('/protected', jwtCheck);
+
+router.get('/protected/prefs', function(req, res, next) {
+  res.json('API Users');
+});
+
+router.get('/protected/plan', function(req, res, next) {
+  res.json('API Plan');
+});
+
 router.post('/signup', function(req, res, next) {
   var unhashedPassword = req.body.password;
   accounts.validUsername(req.body)
@@ -43,14 +57,6 @@ router.post('/authenticate', function(req, res) {
 });
 
 router.get('/:userId', function(req, res, next) {
-  res.json('API Users');
-});
-
-router.get('/:userId/prefs', function(req, res, next) {
-  res.json('API Users');
-});
-
-router.get('/:userId/plan', function(req, res, next) {
   res.json('API Users');
 });
 
