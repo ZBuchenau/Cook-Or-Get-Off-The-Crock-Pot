@@ -4,38 +4,42 @@ function normalize(arr) {
   var recipesArr = arr;
   var len = recipesArr.length;
   var ingredients = [];
-  var ingObj = [];
+  var ingObj = {};
   for (var i = 0; i < len; i++) {
     var recipeingredients = recipesArr[i];
     for (var c = 0; c < recipeingredients.length; c++) {
 
       var name = recipeingredients[c].name;
-      var amount = recipeingredients[c].amount;
+      var amount = parseInt(recipeingredients[c].amount);
       var unit = recipeingredients[c].unit;
       var aisle = recipeingredients[c].aisle;
 
       if ( compareName(name, ingredients) ) {
         var obj = {};
-        obj.name = name;
-        obj.amount = amount;
-        obj.unit = unit;
-        obj.aisle = aisle;
+        ingObj[name] = {};
+        ingObj[name].amount = amount;
+        ingObj[name].unit = unit;
+        ingObj[name].aisle = aisle;
 
-        ingObj.push(obj);
         ingredients.push(name);
+
+      } else {
+        if(name in ingObj){
+          ingObj[name].amount += amount;
+        }
 
       }
 
     }
   }
+  // console.log(ingObj);
   //
-  // console.log(ingredients);
 }
 
 function compareName(name, ingredientsArr) {
 
   // loop through ingredients array
-  var isUnique = true
+  var isUnique = true;
   var ingredientName = name;
   var ingredients = ingredientsArr;
   var len = ingredients.length;
@@ -49,6 +53,30 @@ function compareName(name, ingredientsArr) {
   return isUnique;
 }
 
+function unitConverter(unit, amount){
+  if(!unit){
+    return '';
+  } else if (unit === 'T' || unit.toLowerCase() === 'tbsp' || unit.toLowerCase === 'tbsps' || unit.toLowerCase() === 'tablespoon' || unit.toLowerCase() === 'tablespoons'){
+    console.log(Math.ceil(convert(amount).from('Tbs').to('fl-oz')) + " fl-oz");
+  } else if (unit === 't' || unit.toLowerCase() === 'tsp'  || unit.toLowerCase() === 'tsps' || unit.toLowerCase() === 'teaspoon' || unit.toLowerCase() === 'teaspoons'){
+    console.log(Math.ceil(convert(amount).from('tsp').to('fl-oz')) + " fl-oz");
+  } else if (unit === 'c' || unit.toLowerCase() === 'cups' || unit.toLowerCase() === 'cup'){
+    console.log(Math.ceil(convert(amount).from('cup').to('fl-oz')) + " fl-oz");
+  } else if (unit === 'lb' || unit === 'lbs' || unit === 'pound' || unit === 'pounds' || unit === 'lb.' || unit === 'lbs.'){
+    console.log(Math.ceil(convert(amount).from('lb').to('oz')) + " oz");
+  } else if ( unit === 'g' || unit === 'gr' || unit === 'grams' || unit === 'gram'){
+    console.log(Math.ceil(convert(amount).from('g').to('oz')) + " oz");
+  }
+}
+
+unitConverter('T', 100);
+unitConverter('cups', 1);
+unitConverter('tsp', 100);
+unitConverter('pounds', 1);
+unitConverter('g', 100);
+
+
+
 var data = [
   [{
     recipe_id: 5,
@@ -57,7 +85,16 @@ var data = [
     aisle: '?',
     unit: 'T',
     amount: '2.00'
-  }, {
+  },
+  {
+    recipe_id: 5,
+    ingredient_id: 38,
+    name: 'garlic',
+    aisle: '?',
+    unit: 'T',
+    amount: '5000'
+  },
+  {
     recipe_id: 5,
     ingredient_id: 39,
     name: 'ginger',
