@@ -9,7 +9,7 @@ router.get('/', function(req, res) {
 });
 
 router.post('/shopping-list', function(req, res) {
-  var recipes = req.body.recipes;
+  var recipes = JSON.parse(req.body.recipes);
   var recipePromises = [];
   recipes.forEach(function(element, index) {
     recipePromises.push(
