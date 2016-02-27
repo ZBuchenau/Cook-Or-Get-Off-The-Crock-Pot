@@ -64,8 +64,9 @@ router.get('/:userId', function(req, res, next) {
 router.post('/protected/text', function(req, res, next){
   var textRecieve = req.body.phone;
   var message = req.body.message;
+  console.log(message, textRecieve);
   var client = require('twilio')(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
-  if(phoneCheck(req.params)){
+  if(phoneCheck(textRecieve)){
     client.sendMessage({
         to: "+1" + textRecieve,
         from: "+1" + process.env.TWILIO_PHONE,
@@ -86,7 +87,8 @@ router.post('/protected/text', function(req, res, next){
 });
 
 function phoneCheck(num){
-  if(/^[0-9]{10}$/.test(num)){
+  var newNum = num.toString();
+  if(/^[0-9]{10}$/.test(newNum)){
      return true;
   } else {
     return false;
