@@ -66,6 +66,8 @@ function unitConverter(unit, amount){
     console.log(Math.ceil(convert(amount).from('lb').to('oz')) + " oz");
   } else if ( unit === 'g' || unit === 'gr' || unit === 'grams' || unit === 'gram'){
     console.log(Math.ceil(convert(amount).from('g').to('oz')) + " oz");
+  } else {
+    console.log('not a traditional unit of measurement');
   }
 }
 
@@ -74,6 +76,8 @@ unitConverter('cups', 1);
 unitConverter('tsp', 100);
 unitConverter('pounds', 1);
 unitConverter('g', 100);
+unitConverter('handful', 3);
+
 
 
 
