@@ -61,13 +61,15 @@ router.get('/:userId', function(req, res, next) {
   res.json('API Users');
 });
 
-router.post('/protected/:phone', function(req, res, next){
+router.post('/protected/text', function(req, res, next){
+  var textRecieve = req.body.phone;
+  var message = req.body.message;
   var client = require('twilio')(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
-  if(phoneCheck(req.params.phone)){
+  if(phoneCheck(req.params)){
     client.sendMessage({
-        to: "+1" + req.params.phone,
+        to: "+1" + textRecieve,
         from: "+1" + process.env.TWILIO_PHONE,
-        body: "Testing"
+        body: message
     }, function(err, message) {
         if(err){
           console.log(err);
