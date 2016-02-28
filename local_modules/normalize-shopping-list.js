@@ -32,8 +32,7 @@ function normalize(arr) {
 
     }
   }
-  // console.log(ingObj);
-  //
+  console.log(ingObj);
 }
 
 function compareName(name, ingredientsArr) {
