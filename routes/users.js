@@ -20,7 +20,6 @@ router.get('/protected/plan', function(req, res, next) {
 });
 
 router.post('/signup', function(req, res, next) {
-  console.log(req.body);
   var unhashedPassword = req.body.password;
   accounts.validUsername(req.body)
     .then(accounts.validPassword)
