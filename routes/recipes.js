@@ -1,6 +1,7 @@
 'use strict';
 var express = require('express');
 var router = express.Router();
+var normalize = require('../local_modules/normalize-shopping-list.js');
 
 router.get('/', function(req, res) {
   knex('recipes').select('*').then(function(recipes) {
@@ -23,6 +24,7 @@ router.post('/shopping-list', function(req, res) {
   Promise.all(recipePromises)
     .then(function(ingredientsList) {
       console.log(ingredientsList);
+      console.log(normalize(ingredientsList));
       res.json(ingredientsList);
     });
 });
