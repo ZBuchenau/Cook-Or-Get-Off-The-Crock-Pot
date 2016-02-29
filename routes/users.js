@@ -43,7 +43,7 @@ router.post('/authenticate', function(req, res) {
   accounts.authenticate(req.body).then(function(user) {
     if (user) {
       var token = jwt.sign(user, process.env.SECRET, {
-        expiresIn: 60 * 5
+        expiresIn: 60 * 60
       });
       res.json({
         token: token,
@@ -63,7 +63,6 @@ router.get('/:userId', function(req, res, next) {
 router.post('/protected/text', function(req, res, next){
   var textRecieve = req.body.phone;
   var message = req.body.message;
-  console.log(message, textRecieve);
   var client = require('twilio')(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
   if(phoneCheck(textRecieve)){
     client.sendMessage({
@@ -73,11 +72,10 @@ router.post('/protected/text', function(req, res, next){
     }, function(err, message) {
         if(err){
           console.log(err);
+          res.send('error sending text');
         } else {
-          console.log(message);
+          res.send('text has been sent');
         }
-
-        res.send('text has been sent!');
     });
   }
   else {

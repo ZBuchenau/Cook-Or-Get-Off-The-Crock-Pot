@@ -42,7 +42,6 @@ function normalize(arr) {
 
     }
   }
-  console.log(sortedObject(ingObj));
   return sortedObject(ingObj);
 }
 
