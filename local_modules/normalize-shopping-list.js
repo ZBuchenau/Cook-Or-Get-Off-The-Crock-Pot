@@ -27,10 +27,17 @@ function normalize(arr) {
         ingredients.push(name);
 
       } else {
+        var plural = name + 's';
+        var singular = name.slice(0, -1);
+        if (plural in ingObj) {
+          ingObj[plural].amount += converted.amount;
+        }
         if (name in ingObj) {
           ingObj[name].amount += converted.amount;
         }
-
+        if (singular in ingObj) {
+          ingObj[singular].amount += converted.amount;
+        }
       }
 
     }
@@ -63,12 +70,6 @@ function compareName(name, ingredientsArr) {
     var singular = ingredients[i].slice(0, -1);
     if (singular === ingredientName || ingredientName === ingredients[i] || (ingredientName) === ingredients[i] + 's') {
       isUnique = false;
-    }
-    if (singular === ingredientName) {
-      return 'singular';
-    }
-    if (singular === ingredientName) {
-      return 'singular';
     }
   }
   return isUnique;
