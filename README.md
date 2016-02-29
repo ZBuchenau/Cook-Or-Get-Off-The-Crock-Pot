@@ -9,8 +9,8 @@
  3. knex migrate:latest
  4. knex seed:run
  5. psql food_planner
- 6. ALTER SEQUENCE recipes_id_seq RESTART WITH 10;
- 7. ALTER SEQUENCE ingredients_id_seq RESTART WITH 74;
+ 6. ALTER SEQUENCE recipes_id_seq RESTART WITH 21;
+ 7. ALTER SEQUENCE ingredients_id_seq RESTART WITH 190;
  8. ALTER SEQUENCE users_id_seq RESTART WITH 6;
 
 ## Deploying to Heroku
@@ -23,7 +23,6 @@
  7. heroku config:set TWILIO_ACCOUNT_SID=<account sid>
  8. heroku config:set TWILIO_AUTH_TOKEN=<auth token>
  9. heroku config:set SECRET=<secret>
- 10. heroku config:set PORT=3000
 
 # Create the Database
  1. heroku addons | grep POSTGRES
