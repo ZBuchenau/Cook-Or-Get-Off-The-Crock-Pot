@@ -1,4 +1,6 @@
-require('dotenv').load();
+require('dotenv').load({
+  silent: true
+});
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');

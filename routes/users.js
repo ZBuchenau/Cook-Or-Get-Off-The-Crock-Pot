@@ -1,4 +1,3 @@
-require('dotenv').load();
 var express = require('express');
 var expressJwt = require('express-jwt');
 var jwt = require('jsonwebtoken');

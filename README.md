@@ -23,6 +23,7 @@
  7. heroku config:set TWILIO_ACCOUNT_SID=<account sid>
  8. heroku config:set TWILIO_AUTH_TOKEN=<auth token>
  9. heroku config:set SECRET=<secret>
+ 10. heroku config:set PORT=3000
 
 # Create the Database
  1. heroku addons | grep POSTGRES
