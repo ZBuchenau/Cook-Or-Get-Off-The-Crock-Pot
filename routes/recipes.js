@@ -23,8 +23,6 @@ router.post('/shopping-list', function(req, res) {
   });
   Promise.all(recipePromises)
     .then(function(ingredientsList) {
-      console.log(ingredientsList);
-      // console.log(normalize(ingredientsList));
       res.json(normalize(ingredientsList));
     });
 });
